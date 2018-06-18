@@ -12,6 +12,7 @@
 
 #define snarePin A0
 #define hihatPin A1
+#define crashPin A2
 
 void setup() {
   Serial.begin(115200);
@@ -20,29 +21,45 @@ void setup() {
 void loop() {
   int snare = analogRead(snarePin);
   int hihat = analogRead(hihatPin);
+  int crash = analogRead(crashPin);
+  
   //Serial.println(snare);
-  if (snare > 50 ){
-    int vel = map(snare, 50, 1023, 1, 127);
+  if (snare > 100 ){
+    int vel = map(snare, 100, 1023, 1, 127);
     noteOn(0, 40, vel);   // Channel 0, E3
     MidiUSB.flush(); 
     noteOff(0, 40, vel);  // TurnOff E3
     MidiUSB.flush();
   }
-  if (hihat > 50 ){
-    if (hihat > 500 ){
-      int vel = map(hihat, 500, 1023, 40, 127);
+  if (crash > 100 ){
+    int vel = map(snare, 100, 1023, 1, 127);
+    noteOn(0, 40, vel);   // Channel 0, E3
+    MidiUSB.flush(); 
+    noteOff(0, 40, vel);  // TurnOff E3
+    MidiUSB.flush();
+  }
+  if (hihat > 100 ){
+    if (hihat > 600 ){
+      int vel = map(hihat, 600, 1023, 40, 127);
       noteOn(1, 46, vel+50);   // Channel 1, A#3
       MidiUSB.flush();
       noteOff(1, 46, vel+50);  // Turn Off A#3
       MidiUSB.flush(); 
     }
     else {
-      int vel = map(hihat, 50, 500, 1, 100);
+      int vel = map(hihat, 100, 600, 1, 100);
       noteOn(1, 42, vel);   // Channel 1, F#3
       MidiUSB.flush();
       noteOff(1, 42, vel);  // TurnOff F#3
       MidiUSB.flush(); 
     }
+  if (crash > 100 ){
+    int vel = map(snare, 100, 1023, 1, 127);
+    noteOn(0, 50, vel);   // Channel 0, E3
+    MidiUSB.flush(); 
+    noteOff(0, 50, vel);  // TurnOff E3
+    MidiUSB.flush();
+  }
     
   }
   
