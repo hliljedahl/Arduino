@@ -21,47 +21,44 @@ void setup() {
 void loop() {
   int snare = analogRead(snarePin);
   int hihat = analogRead(hihatPin);
-  int crash = analogRead(crashPin);
+ // int crash = analogRead(crashPin);
   
   //Serial.println(snare);
-  if (snare > 100 ){
-    int vel = map(snare, 100, 1023, 1, 127);
-    noteOn(0, 40, vel);   // Channel 0, E3
+  if (snare > 300 ){
+    int vel = map(snare, 300, 1023, 1, 127);
+    noteOn(0, 38, vel);   // Channel 0, E3
     MidiUSB.flush(); 
-    noteOff(0, 40, vel);  // TurnOff E3
+    delay(1);
+    noteOff(0, 38, vel);  // TurnOff E3
     MidiUSB.flush();
+    //delay(4);
   }
-  if (crash > 100 ){
-    int vel = map(snare, 100, 1023, 1, 127);
-    noteOn(0, 40, vel);   // Channel 0, E3
-    MidiUSB.flush(); 
-    noteOff(0, 40, vel);  // TurnOff E3
-    MidiUSB.flush();
-  }
-  if (hihat > 100 ){
-    if (hihat > 600 ){
-      int vel = map(hihat, 600, 1023, 40, 127);
-      noteOn(1, 46, vel+50);   // Channel 1, A#3
+  if (hihat > 200 ){
+    //if (hihat > 300 ){
+      int vel = map(hihat, 300, 1023, 1, 127);
+      noteOn(1, 42, vel);   // Channel 1, A#3
       MidiUSB.flush();
-      noteOff(1, 46, vel+50);  // Turn Off A#3
-      MidiUSB.flush(); 
-    }
+      //delay(4);
+      noteOff(1, 42, vel);  // Turn Off A#3
+      MidiUSB.flush();
+      //delay(4);
+   }
+    /*
     else {
       int vel = map(hihat, 100, 600, 1, 100);
-      noteOn(1, 42, vel);   // Channel 1, F#3
+      noteOn(2, 42, vel);   // Channel 1, F#3
       MidiUSB.flush();
-      noteOff(1, 42, vel);  // TurnOff F#3
+      noteOff(2, 42, vel);  // TurnOff F#3
       MidiUSB.flush(); 
-    }
-  if (crash > 100 ){
-    int vel = map(snare, 100, 1023, 1, 127);
-    noteOn(0, 50, vel);   // Channel 0, E3
+    }*/
+  /*if (crash > 30 ){
+    int vel = map(snare, 30, 1023, 1, 100);
+    noteOn(3, 50, vel);   // Channel 0, E3
     MidiUSB.flush(); 
-    noteOff(0, 50, vel);  // TurnOff E3
+    noteOff(3, 50, vel);  // TurnOff E3
     MidiUSB.flush();
-  }
-    
-  }
+  }*/
+
   
   /*
   Serial.println("Sending note on");
